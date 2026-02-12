@@ -67,7 +67,7 @@ export default function HomePage() {
     // 3. Se l'utente È loggato E verificato -> Mostra la Dashboard (Work in Progress)
     return (
         <div className="flex h-screen w-screen flex-col items-center justify-center bg-background text-white p-8 text-center uppercase">
-            <h1 className="text-4xl font-bold mb-4">Dashboard OnlyF1 🏎️</h1>
+            <h1 className="text-4xl font-bold mb-4">Dashboard OpenPaddock 🏎️</h1>
             <p className="text-xl text-gray-400 mb-8">Benvenuto nel Paddock. Profilo verificato con successo.</p>
 
             <button

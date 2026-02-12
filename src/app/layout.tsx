@@ -1,8 +1,8 @@
 import "./css/globals.css";
 
 export const metadata = {
-  title: 'OnlyF1',
-  description: 'Your F1 Dashboard',
+  title: 'OpenPaddock',
+  description: 'Tutto sulla F1 in un unico posto',
 }
 
 export default function RootLayout({

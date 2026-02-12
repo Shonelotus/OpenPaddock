@@ -31,7 +31,7 @@ export default function LoginPage() {
         <div className="flex h-screen w-screen items-center justify-center bg-background text-white p-4">
             <div className="w-full max-w-md space-y-8 p-8 border border-white/10 rounded-2xl bg-black/50">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold">Accedi a OnlyF1</h2>
+                    <h2 className="text-3xl font-bold">Accedi a OpenPaddock</h2>
                     <p className="mt-2 text-gray-400">Inserisci le tue credenziali</p>
                 </div>
 
@@ -53,6 +53,12 @@ export default function LoginPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <p className="text-center text-gray-400 text-xs">
+                            Non ricordi la password?{" "}
+                            <Link href="/resetPassword" className="text-primary hover:underline">
+                                Clicca qui
+                            </Link>
+                        </p>
                     </div>
 
                     {error && <p className="text-red-500 text-sm text-center">{error}</p>}
