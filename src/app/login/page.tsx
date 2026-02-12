@@ -18,6 +18,10 @@ export default function LoginPage() {
         setError(null);
 
         try {
+            if (!email || !password) {
+                setError("Inserisci email e password");
+                return;
+            }
             await login(email, password);
             router.push("/"); // Vai alla home (che verificherà l'autenticazione)
         } catch (err: any) {
