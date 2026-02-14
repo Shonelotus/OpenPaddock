@@ -1,30 +1,14 @@
-interface NewsArticle {
-    // Identificativi
+export interface NewsArticle {
     id: number;
     title: string;
-    summary: string;
-
-    // Contenuto
-    contents: string[];
-    images: string[];
-    author: string;
-
-    // Origine
-    sourceUrl: string;
-    sourceName: string;
-    sourceLogo?: string;
-
-    // Organizzazione
-    category: "breaking" | "team-news" | "interview" | "analysis" | "preview";
+    description: string;
+    content?: string; // Opzionale
+    link: string;
+    image_url: string | null;
+    source: string;
+    category?: string;
     tags?: string[];
-    featured?: boolean;
-
-    // Timestamp
-    publishedAt: string;
-    createdAt: string;
-
-    // Analytics
-    views?: number;
+    priority?: number;
+    published_at: string;
+    created_at?: string;
 }
-
-export default NewsArticle;

@@ -1,4 +1,4 @@
-interface Race {
+export interface Race {
     // Identificativi
     id: number;
     round: number;
@@ -29,4 +29,3 @@ interface Race {
     fastestLapSpeed?: number;
 }
 
-export default Race;

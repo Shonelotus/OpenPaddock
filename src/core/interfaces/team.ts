@@ -1,4 +1,4 @@
-interface Team {
+export interface Team {
     // Identificativi
     id: number;
     name: string;
@@ -35,4 +35,3 @@ interface Team {
     websiteUrl?: string;
 }
 
-export default Team;

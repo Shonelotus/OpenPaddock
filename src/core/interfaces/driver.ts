@@ -1,4 +1,4 @@
-interface Driver {
+export interface Driver {
     // Identificativi
     id: number;
     abbreviation: string;
@@ -34,4 +34,3 @@ interface Driver {
     bio?: string;
 }
 
-export default Driver;

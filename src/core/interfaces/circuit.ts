@@ -26,4 +26,3 @@ interface Circuit {
     circuitTrack?: string;
 }
 
-export default Circuit;

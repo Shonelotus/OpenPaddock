@@ -1,24 +1,19 @@
-"use client"; // Dice a Next.js che questo componente gira nel browser
+"use client";
 
 import { useEffect, useState } from "react";
 import pb from "@/core/pocketbase/connection"; // Importa la connessione al database PocketBase
 import LandingPage from "@/app/landingPage/page"; // Importa la pagina di presentazione (landing)
+import HomePage from "@/app/homePage/page";
 
-export default function HomePage() {
-    // STATI: Variabili che React osserva per capire cosa mostrare
+export default function homePageDefault() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true); // Per mostrare "Caricamento" all'inizio
+    const [loading, setLoading] = useState<boolean>(true);
 
-    // useEffect: Viene eseguito una sola volta all'apertura della pagina
     useEffect(() => {
-        // Controlliamo se nel browser esiste una sessione valida dell'utente
         setIsAuthenticated(pb.authStore.isValid);
-
-        // Finito il controllo, togliamo la scritta caricamento
         setLoading(false);
     }, []);
 
-    // Se stiamo ancora controllando se l'utente esiste...
     if (loading) {
         return (
             <div className="flex h-screen w-screen items-center justify-center bg-background text-white">
@@ -27,14 +22,10 @@ export default function HomePage() {
         );
     }
 
-    // LOGICA DI NAVIGAZIONE:
-    // 1. Se l'utente NON è loggato -> Mostra la Landing Page (Vetrine/Marketing)
     if (!isAuthenticated) {
         return <LandingPage />;
     }
 
-    // 2. Se l'utente È loggato -> Controlliamo se è verificato
-    // Controlliamo l'oggetto 'record' che contiene i dati dell'utente loggato
     if (isAuthenticated && !pb.authStore.record?.verified) {
         return (
             <div className="flex h-screen w-screen flex-col items-center justify-center bg-background text-white p-8 text-center">
@@ -64,21 +55,7 @@ export default function HomePage() {
         );
     }
 
-    // 3. Se l'utente È loggato E verificato -> Mostra la Dashboard (Work in Progress)
     return (
-        <div className="flex h-screen w-screen flex-col items-center justify-center bg-background text-white p-8 text-center uppercase">
-            <h1 className="text-4xl font-bold mb-4">Dashboard OpenPaddock 🏎️</h1>
-            <p className="text-xl text-gray-400 mb-8">Benvenuto nel Paddock. Profilo verificato con successo.</p>
-
-            <button
-                onClick={() => {
-                    pb.authStore.clear();
-                    setIsAuthenticated(false);
-                }}
-                className="px-6 py-2 bg-red-600 hover:bg-red-700 rounded-full transition"
-            >
-                Logout
-            </button>
-        </div>
+        <HomePage />
     );
 }
