@@ -42,3 +42,14 @@
 #devtools-indicator {
     display: none !important;
 }
+
+/* Nascondi scrollbar ma permetti lo scroll (Utility) */
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+}

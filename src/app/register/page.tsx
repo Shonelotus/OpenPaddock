@@ -1,6 +1,6 @@
 "use client";  // Dice a Next.js che questo componente gira nel browser
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { register } from "@/core/pocketbase/auth";
 import Link from "next/link";
@@ -15,6 +15,13 @@ export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [success, setSuccess] = useState(false); // Nuovo stato per il successo
     const router = useRouter();  // Per navigare tra pagine
+
+    useEffect(() => {
+        document.body.classList.add("no-scrollbar");
+        return () => {
+            document.body.classList.remove("no-scrollbar");
+        };
+    }, []);
 
     // FUNZIONE che gestisce il click su "Registrati"
     async function registerUser(e: React.SubmitEvent) {

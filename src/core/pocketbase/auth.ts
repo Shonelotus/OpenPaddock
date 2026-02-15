@@ -15,12 +15,6 @@ export async function register(email: string, password: string, username: string
     return user;
 }
 
-// Ottieni email
-export async function getEmail(email: string) {
-    const result = await pb.collection("users").getFirstListItem(`email = "${email}"`);
-    return result;
-}
-
 // Richiedi reset password
 export async function resetPassword(email: string) {
     await pb.collection("users").requestPasswordReset(email);

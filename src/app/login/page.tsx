@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/core/pocketbase/auth";
 import Link from "next/link";
@@ -12,6 +12,13 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        document.body.classList.add("no-scrollbar");
+        return () => {
+            document.body.classList.remove("no-scrollbar");
+        };
+    }, []);
 
     async function handleLogin(e: React.SubmitEvent) {
         e.preventDefault();

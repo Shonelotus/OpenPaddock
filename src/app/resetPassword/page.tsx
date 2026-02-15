@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { resetPassword, getEmail } from "@/core/pocketbase/auth";
+import { resetPassword } from "@/core/pocketbase/auth";
 import Link from "next/link";
 
 export default function ResetPasswordPage() {
@@ -11,6 +11,13 @@ export default function ResetPasswordPage() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        document.body.classList.add("no-scrollbar");
+        return () => {
+            document.body.classList.remove("no-scrollbar");
+        };
+    }, []);
 
     async function handleResetPassword(e: React.SubmitEvent) {
         e.preventDefault();
@@ -22,19 +29,13 @@ export default function ResetPasswordPage() {
                 setError("Inserisci un'email");
                 return;
             }
-            try {
-                await getEmail(email);
-            }
-            catch (err) {
-                setError("Email non trovata");
-                return;
-            }
+            // PocketBase non permette di verificare l'esistenza della mail senza login per sicurezza.
+            // Quindi proviamo direttamente il reset. Se la mail esiste, arriverà.
             await resetPassword(email);
             setSuccess(true);
         } catch (err: any) {
             setError("Si è verificato un errore durante il reset");
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     }

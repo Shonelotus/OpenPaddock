@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import pb from "@/core/pocketbase/connection";
-import { isLoggedIn } from "@/core/pocketbase/auth";
+import { isLoggedIn, getCurrentUser } from "@/core/pocketbase/auth";
 import LandingPage from "@/app/landingPage/page";
 import HomePage from "@/app/homePage/page";
 
@@ -14,6 +14,19 @@ export default function homePageDefault() {
         setIsAuthenticated(isLoggedIn());
         setLoading(false);
 
+        // Se l'utente è loggato ma non risulta verificato localmente,
+        // forziamo un refresh dal server per vedere se ha cliccato il link nel frattempo.
+        if (!isLoggedIn && !getCurrentUser()?.verified) {
+            pb.collection("users").authRefresh().then(() => {
+                // Aggiorna lo stato dopo il refresh
+                setIsAuthenticated(isLoggedIn);
+            }).catch(() => {
+                // Se il refresh fallisce (es. token scaduto), slogghiamo
+                pb.authStore.clear();
+                setIsAuthenticated(false);
+            });
+        }
+
         // Ascolta i cambiamenti di autenticazione (es. Logout dall'Header)
         const unsubscribe = pb.authStore.onChange(() => {
             setIsAuthenticated(isLoggedIn());
@@ -21,8 +34,21 @@ export default function homePageDefault() {
 
         return () => {
             unsubscribe();
+            // Reset scrollbar quando smonto
+            document.body.classList.remove("no-scrollbar");
         };
     }, []);
+
+    // Gestione Scrollbar basata sullo stato
+    useEffect(() => {
+        if (!loading) {
+            if (!isAuthenticated) {
+                document.body.classList.add("no-scrollbar");
+            } else {
+                document.body.classList.remove("no-scrollbar");
+            }
+        }
+    }, [isAuthenticated, loading]);
 
     if (loading) {
         return (
