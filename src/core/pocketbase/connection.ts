@@ -3,6 +3,7 @@ import PocketBase from "pocketbase";
 //indirizzo di localhost
 //Per andare su pockethost: http://raspberrypi:8091/_/
 const pb = new PocketBase("http://raspberrypi:8091");
+pb.autoCancellation(false);
 
 // Sincronizza lo stato di PocketBase con i cookie per il middleware
 if (typeof document !== "undefined") {

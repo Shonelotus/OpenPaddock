@@ -1,12 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest } from 'next/server'
+import { updateSession } from '@/core/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-    // Per ora, disabilitiamo il controllo server-side in attesa di @supabase/auth-helpers-nextjs
-    // La protezione avviene client-side in src/app/page.tsx
-
-    return NextResponse.next();
+    // Passiamo la richiesta alla nostra funzione di utilità Supabase SSR
+    // che controllerà la sessione, rinnoverà i token se necessario
+    // e gestirà i reindirizzamenti per le pagine protette.
+    return await updateSession(request)
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-};
+    // Qui diciamo a Next.js su quali percorsi far girare il middleware.
+    // Ignoriamo file statici (_next, public, immagini) e le chimate /api
+    // per non pesare sulle performance del frontend inutilmente.
+    matcher: [
+        '/((?!_next/static|_next/image|favicon.ico|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    ],
+}

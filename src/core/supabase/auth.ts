@@ -1,18 +1,5 @@
 import { supabase } from "./client";
-
-// Interfaccia per il profilo utente
-// la creo qui perche su supabase avro solo l'auth
-export interface Profile {
-    id: string;
-    username: string;
-    display_name: string | null;
-    avatar_url: string | null;
-    country: string | null;
-    favorite_driver: number | null;
-    favorite_team: string | null;
-    role: "user" | "admin";
-    created_at: string;
-}
+import { Profile } from "./interface/profile";
 
 // Registra nuovo utente
 export async function register(email: string, password: string, username: string) {
@@ -104,13 +91,13 @@ export async function getProfile(userId: string): Promise<Profile | null> {
 //nota bene: non posso usare il tipo Profile completo perché non ho tutti i campi
 //quindi uso Partial<Profile>
 export async function updateProfile(userId: string, updates: Partial<Profile>) {
-    const { data, error } = await supabase
+    const { error } = await supabase
         .from("profiles")
         .update(updates)
         .eq("id", userId);
     if (error) {
         console.error("Error updating profile:", error.message);
-        return null;
+        return false;
     }
-    return data;
+    return true;
 }
