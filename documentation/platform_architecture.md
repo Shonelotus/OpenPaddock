@@ -60,7 +60,7 @@ graph LR
 | id | auto | PK |
 | title | text | |
 | link | url | Unico (deduplicazione) |
-| description | text | Anteprima (~200 char) |
+| description | text | Anteprima (~400 char) |
 | content | text | HTML completo |
 | image_url | url | Nullable |
 | source | text | (es. "motorsport.com") |

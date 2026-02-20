@@ -1,17 +1,14 @@
-import Parser from "rss-parser"
-import { createClient } from "@supabase/supabase-js";
+import Parser from "rss-parser";
+import PocketBase from "pocketbase";
 import { type NextRequest, NextResponse } from "next/server";
-import { NewsArticle } from "@/core/interfaces/newsArticle";
 
+// Inizializza parser RSS
 const parser = new Parser();
 
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SECRET_KEY!
-);
+// Inizializza PocketBase (lato server)
+const pb = new PocketBase("http://raspberrypi:8091");
 
-
-//Algoritmo per calcolare la similarità tra due stringhe
+// Algoritmo per calcolare la similarità tra due stringhe (Levenshtein semplificato)
 function similarity(s1: string, s2: string) {
     let longer = s1;
     let shorter = s2;
@@ -29,13 +26,11 @@ function similarity(s1: string, s2: string) {
 function editDistance(s1: string, s2: string) {
     s1 = s1.toLowerCase();
     s2 = s2.toLowerCase();
-
     const costs = new Array();
     for (let i = 0; i <= s1.length; i++) {
         let lastValue = i;
         for (let j = 0; j <= s2.length; j++) {
-            if (i == 0)
-                costs[j] = j;
+            if (i == 0) costs[j] = j;
             else {
                 if (j > 0) {
                     let newValue = costs[j - 1];
@@ -46,98 +41,116 @@ function editDistance(s1: string, s2: string) {
                 }
             }
         }
-        if (i > 0)
-            costs[s2.length] = lastValue;
+        if (i > 0) costs[s2.length] = lastValue;
     }
     return costs[s2.length];
 }
-//Fine algoritmo
 
 export async function GET(request: NextRequest) {
-    // 0. CONTROLLO SICUREZZA: Verifichiamo la chiave segreta
-    const authHeader = request.headers.get('authorization');
-
+    // 0. CONTROLLO SICUREZZA:
+    const authHeader = request.headers.get("authorization");
     if (authHeader !== `Bearer ${process.env.CRON_SECRET_KEY}`) {
         return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    //prendo il link del feed RSS dai parametri della richiesta
-    const searchParams = request.nextUrl.searchParams;
-    const link = searchParams.get('link') || 'https://it.motorsport.com/rss/f1/news/';
-
     try {
+        // 1. AUTENTICAZIONE ADMIN SU POCKETBASE
+        // Necessaria per scrivere nella collezione 'news' se le API rules sono restrittive
+        console.log("Tentativo Login Admin...", process.env.POCKETBASE_ADMIN_EMAIL);
+
+        await pb.admins.authWithPassword(
+            process.env.POCKETBASE_ADMIN_EMAIL!,
+            process.env.POCKETBASE_ADMIN_PASSWORD!
+        );
+
+        if (pb.authStore.isValid) {
+            console.log("LOGIN ADMIN: Successo (Token valido)");
+        } else {
+            console.log("LOGIN ADMIN: Fallito (Token non valido)");
+            throw new Error("Login fallito post-auth");
+        }
+
+        // 2. RECUPERA NEWS ESISTENTI (per controllo duplicati)
+        // Proviamo a fare una lista SENZA ordinamento per ora
+        console.log("Tentativo recupero lista news...");
+        const recentNews = await pb.collection("news").getList(1, 5);
+
+        // 3. FETCH RSS
+        const searchParams = request.nextUrl.searchParams;
+        const link = searchParams.get("link") || "https://it.motorsport.com/rss/f1/news/";
         const feed = await parser.parseURL(link);
 
-        // 0. Fetch delle ultime news già nel DB per confronto
-        // Usiamo supabaseAdmin anche qui per coerenza, ma basterebbe quello normale
-        const { data: recentNews } = await supabaseAdmin
-            .from('news')
-            .select('title')
-            .order('created_at', { ascending: false })
-            .limit(50);
-
-        // 1. Preparazione Dati BULK (Massiva) con filtro Deduplicazione
-        const newsToInsert: Omit<NewsArticle, 'id'>[] = [];
+        let createdCount = 0;
+        let skippedCount = 0;
 
         for (const item of feed.items) {
             if (!item.link || !item.title) continue;
 
             const title = item.title.trim();
+            const linkUrl = item.link;
 
-            // CHECK DUPLICATI: Controlliamo se c'è già un titolo simile > 75%
-            const isDuplicate = recentNews?.some(existing => {
-                const sim = similarity(title, existing.title);
-                return sim > 0.75; // Se sono uguali al 75%, lo scartiamo
-            });
-
-            if (isDuplicate) {
-                console.log(`Skipping duplicate/similar news: "${title}"`);
+            // CHECK DUPLICATI ESATTI (Link)
+            // Nota: Se hai messo il vincolo UNIQUE su 'link' nel DB, potremmo anche lasciar fare errore al DB,
+            // ma controllarlo prima evita chiamate inutili.
+            const existsByLink = recentNews.items.some((n) => n.link === linkUrl);
+            if (existsByLink) {
+                skippedCount++;
                 continue;
             }
 
+            // CHECK DUPLICATI SIMILI (Titolo)
+            const isDuplicateTitle = recentNews.items.some((existing) => {
+                const sim = similarity(title, existing.title);
+                return sim > 0.75;
+            });
+
+            if (isDuplicateTitle) {
+                console.log(`Skipping similar news: "${title}"`);
+                skippedCount++;
+                continue;
+            }
+
+            // PREPARA DATI
             const publishedAt = item.pubDate ? new Date(item.pubDate) : new Date();
-            const sourceDomain = new URL(link).hostname.replace('www.', '');
-            const description = (item.contentSnippet || item.description || item.content || "").substring(0, 200) + "...";
-            const content = item['content:encoded'] || item.content || item.description || "";
+            const sourceDomain = new URL(link).hostname.replace("www.", "");
+            // Pulizia descrizione
+            let description = item.contentSnippet || item.description || "";
+            if (description.length > 200) description = description.substring(0, 200) + "...";
 
-            newsToInsert.push({
-                title: title,
-                link: item.link,
-                description: description,
-                content: content,
-                image_url: item.enclosure?.url || null,
-                source: sourceDomain,
-                published_at: publishedAt.toISOString(),
-                category: 'F1',
-                tags: ['F1', 'News']
-            });
-        }
+            const content = item["content:encoded"] || item.content || item.description || "";
+            const imageUrl = item.enclosure?.url || null;
 
-        if (newsToInsert.length === 0) {
-            return NextResponse.json({ success: true, count: 0, message: "Nessuna news nuova trovata." });
-        }
-
-        // 2. Esecuzione UPSERT con AMMINISTRATORE
-        const { error, count } = await supabaseAdmin
-            .from('news')
-            .upsert(newsToInsert, {
-                onConflict: 'link',
-                ignoreDuplicates: true
-            });
-
-        if (error) {
-            console.error("Errore Supabase:", error);
-            return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+            // CREA RECORD SU POCKETBASE
+            try {
+                await pb.collection("news").create({
+                    title: title,
+                    link: linkUrl,
+                    description: description,
+                    content: content,
+                    image_url: imageUrl,
+                    source: sourceDomain,
+                    published_at: publishedAt.toISOString(),
+                    category: "F1",
+                    tags: ["F1", "News"],
+                });
+                createdCount++;
+            } catch (err: any) {
+                console.error(`Errore creazione news "${title}":`, err.message);
+            }
         }
 
         return NextResponse.json({
             success: true,
-            parsed: newsToInsert.length,
-            message: `Sincronizzazione completata: ${newsToInsert.length} nuove notizie.`
+            created: createdCount,
+            skipped: skippedCount,
+            message: `Sincronizzazione completata: ${createdCount} nuove notizie.`
         });
 
-    } catch (error) {
-        console.error("Errore RSS:", error);
-        return NextResponse.json({ success: false, error: "Errore nel parsing del feed" }, { status: 500 });
+    } catch (error: any) {
+        console.error("Errore Sync News:", error.response || error.message || error);
+        return NextResponse.json(
+            { success: false, error: error.response?.message || error.message || "Errore sconosciuto", details: error.response },
+            { status: 500 }
+        );
     }
 }

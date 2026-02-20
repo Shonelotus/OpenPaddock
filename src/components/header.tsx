@@ -74,6 +74,9 @@ export default function Header() {
                             <Link href="/stats" className={getLinkClass("/stats")}>
                                 Statistiche
                             </Link>
+                            <Link href="/profile" className={getLinkClass("/profile")}>
+                                Profilo
+                            </Link>
                         </nav>
                     )}
 
