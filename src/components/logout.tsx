@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { logout } from "@/core/supabase/auth";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +12,12 @@ interface LogoutProps {
 
 export default function Logout({ children, className }: LogoutProps) {
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     async function confirmLogout() {
         await logout();
@@ -29,8 +35,8 @@ export default function Logout({ children, className }: LogoutProps) {
                 {children}
             </button>
 
-            {/* MODAL DI CONFERMA LOGOUT */}
-            {showLogoutConfirm && (
+            {/* MODAL DI CONFERMA LOGOUT NEL PORTAL */}
+            {mounted && showLogoutConfirm && createPortal(
                 <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
                     <div className="w-full max-w-sm overflow-hidden rounded-2xl bg-neutral-900 border border-white/10 shadow-2xl animate-in fade-in zoom-in duration-200">
                         <div className="p-6 text-center">
@@ -59,7 +65,8 @@ export default function Logout({ children, className }: LogoutProps) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );

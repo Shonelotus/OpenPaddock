@@ -42,15 +42,38 @@ export async function logout() {
     }
 }
 
-// Richiedi reset password
+// Richiedi reset password con OTP
 export async function resetPassword(email: string) {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/update-password`, // Assicurati di avere questa pagina o rimuovi se non serve redirect
+    const { error } = await supabase.auth.resetPasswordForEmail(email); // NESSUN REDIRECT, vogliamo solo la mail col codice!
+
+    if (error) {
+        throw new Error(error.message);
+    }
+}
+
+// Aggiorna la password dell'utente (usata dopo il click sul link di reset)
+export async function updateUserPassword(newPassword: string) {
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword
     });
 
     if (error) {
         throw new Error(error.message);
     }
+}
+
+// Verifica il codice a 6 cifre OTP mandato per email
+export async function verifyOTP_forPasswordReset(email: string, token: string) {
+    const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: 'recovery'
+    })
+
+    if (error) {
+        throw new Error(error.message);
+    }
+    return data;
 }
 
 // Controlla se loggato (Nota: Supabase è async per la sessione, ma possiamo controllare user sincrono se lo stato è caricato)
