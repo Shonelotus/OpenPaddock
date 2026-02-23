@@ -4,8 +4,9 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
 import { db } from './client';
+import { sql } from 'drizzle-orm';
 import { getMeetings, getSessions, getDrivers } from '../api/openf1/client';
-import { circuits, teams, drivers } from './schemas/2026-02-22_base_teams_drivers_circuits';
+import { circuits, teams, drivers, season_entrants } from './schemas/2026-02-22_base_teams_drivers_circuits';
 import { seasons, events, sessions } from './schemas/2026-02-22_events_and_sessions';
 
 async function seedBaseData() {
@@ -73,52 +74,54 @@ async function seedBaseData() {
                 }
                 console.log(`✅ Aggiunti ${openF1Meetings.length} Gran Premi per il ${YEAR}.`);
 
-                // 3. Scarichiamo i Driver e i Team usando la primissima sessione disponibile
-                console.log(`\n👨‍🚀 Download Piloti e Scuderie (dalla prima sessione)...`);
-                const firstMeeting = openF1Meetings[0];
-                const firstSessions = await getSessions(firstMeeting.meeting_key, YEAR);
+                // 3. Scarichiamo i Driver e i Team per OGNI meeting per raccogliere anche le sostituzioni (es. Bearman, Colapinto)
+                console.log(`\n👨‍🚀 Download Piloti e Scuderie (ciclando tutti i meeting per mappare correttamente la stagione)...`);
 
-                if (firstSessions.length > 0) {
-                    const sessionKey = firstSessions[0].session_key;
-                    const openF1Drivers = await getDrivers(sessionKey);
+                for (const m of openF1Meetings) {
+                    const sessionsForMeeting = await getSessions(m.meeting_key, YEAR);
+                    if (sessionsForMeeting.length > 0) {
+                        // Usiamo una qualsiasi sessione del meeting per ottenere i piloti iscritti
+                        const sessionKey = sessionsForMeeting[0].session_key;
+                        const openF1Drivers = await getDrivers(sessionKey);
 
-                    // Estraiamo i Team univoci
-                    const uniqueTeams = new Map();
-                    openF1Drivers.forEach((d: any) => {
-                        const teamId = d.team_name.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
-                        if (!uniqueTeams.has(teamId)) {
-                            uniqueTeams.set(teamId, {
+                        for (const d of openF1Drivers) {
+                            if (!d.team_name) continue;
+
+                            // 3a. Inseriamo o verifichiamo il Team
+                            const teamId = d.team_name.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
+                            await db.insert(teams).values({
                                 id: teamId,
                                 name: d.team_name,
                                 color: `#${d.team_colour}`,
-                            });
-                        }
-                    });
+                            }).onConflictDoNothing();
 
-                    // Inseriamo i Team
-                    for (const team of Array.from(uniqueTeams.values())) {
-                        await db.insert(teams).values(team).onConflictDoNothing();
-                    }
-                    console.log(`✅ Aggiunte/Verificate ${uniqueTeams.size} Scuderie.`);
-
-                    // Inseriamo i Driver
-                    for (const d of openF1Drivers) {
-                        const teamId = d.team_name.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
-                        await db.insert(drivers)
-                            .values({
+                            // 3b. Inseriamo o verifichiamo il Driver (SENZA team_id)
+                            await db.insert(drivers).values({
                                 id: d.driver_number,
                                 number: d.driver_number,
                                 broadcast_name: d.broadcast_name,
                                 full_name: d.full_name,
                                 name_acronym: d.name_acronym,
-                                team_id: teamId,
                                 country_code: d.country_code,
                                 headshot_url: d.headshot_url,
-                            })
-                            .onConflictDoNothing();
+                            }).onConflictDoNothing();
+
+                            // 3c. Creiamo/Aggiorniamo l'affiliazione Stagione -> Driver -> Team nella tabella Pivot
+                            await db.insert(season_entrants).values({
+                                year: YEAR,
+                                driver_id: d.driver_number,
+                                team_id: teamId,
+                                rounds_entered: 1,
+                            }).onConflictDoUpdate({
+                                target: [season_entrants.year, season_entrants.driver_id, season_entrants.team_id],
+                                set: { rounds_entered: sql`${season_entrants.rounds_entered} + 1` }
+                            });
+                        }
                     }
-                    console.log(`✅ Aggiunti/Verificati ${openF1Drivers.length} Piloti.`);
+                    // Breve delay per evitare limiti rateOpenF1
+                    await new Promise(res => setTimeout(res, 200));
                 }
+                console.log(`✅ Piloti, Team e Iscrizioni mappati per la stagione ${YEAR}.`);
 
                 // 4. Salva anche le Singole Sessioni nel DB per questo anno!
                 console.log(`\n⏱️ Elaborazione Sessioni del weekend (FP1, Sprint, Gara)...`);
