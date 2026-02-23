@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import { User, Flag, MapPin } from "lucide-react";
-import Image from "next/image";
 
 type StandingsData = {
     driver: any;
     team: any;
+    points: number;
 };
 
 export default function StandingsGrid({ data }: { data: StandingsData[] }) {
@@ -32,7 +32,7 @@ export default function StandingsGrid({ data }: { data: StandingsData[] }) {
             initial="hidden"
             animate="show"
         >
-            {data.map(({ driver, team }, index) => (
+            {data.map(({ driver, team, points }, index) => (
                 <motion.div
                     key={`${driver.id}-${team?.id || index}`}
                     variants={itemVariants}
@@ -52,13 +52,19 @@ export default function StandingsGrid({ data }: { data: StandingsData[] }) {
 
                     <div className="p-6 relative z-10">
                         <div className="flex justify-between items-start mb-6">
-                            <div>
-                                <h2 className="text-3xl font-black text-white mix-blend-difference tracking-tighter">
-                                    {driver.number}
-                                </h2>
-                                <p className="text-xs font-bold tracking-widest text-slate-400 uppercase mt-1">
-                                    {driver.name_acronym}
-                                </p>
+                            <div className="flex items-center gap-4">
+                                <div className="flex flex-col items-center justify-center bg-white/10 w-12 h-12 rounded-xl backdrop-blur-sm shadow-inner">
+                                    <span className="text-xs text-white/50 font-bold uppercase tracking-widest leading-none mb-1">Pos</span>
+                                    <span className="text-2xl font-black text-white leading-none">{index + 1}</span>
+                                </div>
+                                <div>
+                                    <h2 className="text-3xl font-black text-white mix-blend-difference tracking-tighter">
+                                        {driver.number}
+                                    </h2>
+                                    <p className="text-xs font-bold tracking-widest text-slate-400 uppercase mt-1">
+                                        {driver.name_acronym}
+                                    </p>
+                                </div>
                             </div>
 
                             {driver.country_code && (
@@ -98,19 +104,23 @@ export default function StandingsGrid({ data }: { data: StandingsData[] }) {
                                 </div>
                             </div>
 
-                            {/* Foto Pilota (Se disponibile, altrimenti placeholder animato) */}
-                            <div className="w-20 h-20 rounded-full bg-linear-to-br from-slate-800 to-slate-900 border-2 flex items-center justify-center shadow-xl overflow-hidden relative shrink-0"
-                                style={{ borderColor: team?.color || '#333' }}>
-                                {driver.headshot_url ? (
-                                    // Usiamo tag img normale per sfuggire al config esigente di next/image sui domini esterni per ora
-                                    <img
-                                        src={driver.headshot_url}
-                                        alt={driver.full_name}
-                                        className="w-full h-full object-cover object-top scale-110 group-hover:scale-125 transition-transform duration-500"
-                                    />
-                                ) : (
-                                    <User size={32} className="text-slate-600" />
-                                )}
+                            {/* Immagine Pilota e Punti */}
+                            <div className="flex flex-col items-center gap-2 shrink-0">
+                                <div className="w-20 h-20 rounded-full bg-linear-to-br from-slate-800 to-slate-900 border-2 flex items-center justify-center shadow-xl overflow-hidden relative"
+                                    style={{ borderColor: team?.color || '#333' }}>
+                                    {driver.headshot_url ? (
+                                        <img
+                                            src={driver.headshot_url}
+                                            alt={driver.full_name}
+                                            className="w-full h-full object-cover object-top scale-110 group-hover:scale-125 transition-transform duration-500"
+                                        />
+                                    ) : (
+                                        <User size={32} className="text-slate-600" />
+                                    )}
+                                </div>
+                                <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                                    <span className="text-sm font-bold text-white">{points} PTS</span>
+                                </div>
                             </div>
                         </div>
                     </div>

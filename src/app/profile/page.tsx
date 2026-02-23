@@ -23,11 +23,11 @@ export default function ProfilePage() {
     const router = useRouter();
 
     const f1Drivers = [
-        { id: 3, name: "Max Verstappen" },
+        { id: 1, name: "Max Verstappen" },
         { id: 17, name: "Isack Hadjar" },
         { id: 16, name: "Charles Leclerc" },
         { id: 44, name: "Lewis Hamilton" },
-        { id: 1, name: "Lando Norris" },
+        { id: 4, name: "Lando Norris" },
         { id: 81, name: "Oscar Piastri" },
         { id: 63, name: "George Russell" },
         { id: 12, name: "Andrea Kimi Antonelli" },

@@ -1,9 +1,11 @@
 import { db } from "../client";
 import { drivers, teams, season_entrants } from "../schemas/2026-02-22_base_teams_drivers_circuits";
-import { eq } from "drizzle-orm";
+import { race_results } from "../schemas/2026-02-23_race_results";
+import { events, sessions } from "../schemas/2026-02-22_events_and_sessions";
+import { eq, sum, sql, and } from "drizzle-orm";
 
 export async function getStandings(year?: number) {
-    // Usiamo la sintassi SQL standard di Drizzle tramite Join con la nuova tabella pivot
+    // 1. Recuperiamo i piloti iscritti per quell'anno (titolari)
     const query = db
         .select({
             driver: drivers,
@@ -19,30 +21,44 @@ export async function getStandings(year?: number) {
     }
 
     const rawStandings = await query;
-
-    // Raggruppiamo i piloti per scuderia
     const teamsMap = new Map<number, typeof rawStandings>();
 
     for (const row of rawStandings) {
-        if (!teamsMap.has(row.team.id)) {
-            teamsMap.set(row.team.id, []);
-        }
+        if (!teamsMap.has(row.team.id)) teamsMap.set(row.team.id, []);
         teamsMap.get(row.team.id)!.push(row);
     }
 
-    // Teniamo solo i 2 piloti Titolari per scuderia (quelli con più gp disputati)
     const titularStandings = [];
     for (const [teamId, teamDrivers] of teamsMap) {
-        // Ordina in modo decrescente per numero di presenze
         teamDrivers.sort((a, b) => b.rounds_entered - a.rounds_entered);
-        // Prendi i primi 2
         titularStandings.push(...teamDrivers.slice(0, 2));
     }
 
-    // Ritorniamo i piloti ordinati per Scuderia
-    return titularStandings.sort((a, b) => {
-        if (a.team.name < b.team.name) return -1;
-        if (a.team.name > b.team.name) return 1;
-        return a.driver.number - b.driver.number;
-    });
+    // 2. Calcoliamo la somma dei punti reali dal database race_results
+    const finalStandings = await Promise.all(titularStandings.map(async (entry) => {
+        // Filtraggio storico usando cross join logic tramite innerJoin
+        const pointsQuery = await db
+            .select({
+                total_points: sql<number>`COALESCE(SUM(${race_results.points}), 0)`
+            })
+            .from(race_results)
+            .innerJoin(sessions, eq(race_results.session_id, sessions.id))
+            .innerJoin(events, eq(sessions.event_id, events.id))
+            .where(
+                and(
+                    eq(race_results.driver_id, entry.driver.id),
+                    year ? eq(events.year, year) : undefined
+                )
+            );
+
+        const totalPoints = pointsQuery[0]?.total_points || 0;
+
+        return {
+            ...entry,
+            points: Number(totalPoints) // Sicurizza come type number
+        };
+    }));
+
+    // Ritorniamo i piloti ordinati per Punteggio decrescente
+    return finalStandings.sort((a, b) => b.points - a.points);
 }

@@ -9,16 +9,8 @@ export default async function StandingsPage(
     const searchParams = await props.searchParams;
     const currentYear = searchParams.year ? parseInt(searchParams.year as string) : 2025;
 
-    //faccio fetch dei dati dal db
+    //faccio fetch dei dati dal db (già ordinati per Punti decrescenti)
     const data = await getStandings(currentYear);
-
-    // Ordiniamo per Scuderia e poi per Numero Pilota
-    const sortedData = data.sort((a, b) => {
-        if (!a.team || !b.team) return 0;
-        if (a.team.name < b.team.name) return -1;
-        if (a.team.name > b.team.name) return 1;
-        return a.driver.number - b.driver.number;
-    });
 
     return (
         <div className="min-h-screen bg-slate-950 p-6 md:p-12 font-sans overflow-x-hidden relative">
@@ -54,7 +46,7 @@ export default async function StandingsPage(
                     </div>
                 </header>
 
-                <StandingsGrid data={sortedData} />
+                <StandingsGrid data={data} />
             </div>
         </div>
     );
