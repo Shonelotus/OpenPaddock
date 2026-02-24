@@ -100,15 +100,29 @@ async function seedRaceResults() {
                     let insertedCount = 0;
                     for (const result of resultsArray) {
                         const driverAcronym = result.Driver.code;
+                        const ergastDriverId = result.Driver.driverId; // es: "colapinto"
                         const position = parseInt(result.position);
                         const points = parseFloat(result.points);
                         const status = result.status;
 
                         // Troviamo l'ID locale del database tramite l'acronimo 
-                        const driverId = acronymToDriverId.get(driverAcronym);
+                        let driverId = driverAcronym ? acronymToDriverId.get(driverAcronym) : undefined;
+
+                        // Fallback manuale per rookie se manca l'acronimo su Ergast
+                        if (!driverId) {
+                            const fallbackMap: Record<string, number> = {
+                                'colapinto': 43,
+                                'bearman': 87,
+                                'lawson': 30,
+                                'antonelli': 12,
+                                'bortoleto': 5,
+                                'hadjar': 17
+                            };
+                            driverId = fallbackMap[ergastDriverId];
+                        }
 
                         if (!driverId) {
-                            console.log(`⚠️  Attenzione: Nessun driver locale trovato per acronimo ${driverAcronym}`);
+                            console.log(`⚠️  Attenzione: Nessun driver locale trovato per acronimo ${driverAcronym} o ID ${ergastDriverId}`);
                             continue;
                         }
 

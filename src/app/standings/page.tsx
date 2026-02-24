@@ -1,6 +1,8 @@
 import { getStandings } from "@/core/postgres/interactions/standings";
 import StandingsGrid from "./StandingsGrid";
 
+export const dynamic = 'force-dynamic';
+
 export default async function StandingsPage(
     props: {
         searchParams: Promise<{ [key: string]: string | string[] | undefined }>
