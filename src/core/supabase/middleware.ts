@@ -42,7 +42,7 @@ export async function updateSession(request: NextRequest) {
 
     // --- REGOLA 1: ROTTE PROTETTE ---
     // Qui inseriamo tutte le pagine che NON possono essere viste senza login
-    const protectedRoutes = ['/profile', '/live-timing', '/stats'];
+    const protectedRoutes = ['/profile', '/live-timing', '/stats', '/standings'];
     const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
 
     // Se non c'è l'utente (non loggato) e prova ad accedere a una di queste rotte:

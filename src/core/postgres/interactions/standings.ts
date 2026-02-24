@@ -75,3 +75,38 @@ export async function getStandings(year?: number) {
     // Ordinamento finale: per punti decrescenti, a parità per rounds disputati
     return finalGrid.sort((a, b) => b.points !== a.points ? b.points - a.points : b.rounds_entered - a.rounds_entered);
 }
+
+
+// ============================================================================
+// CLASSIFICA COSTRUTTORI
+// ============================================================================
+
+export async function getConstructorStandings(year?: number) {
+    // Riutilizziamo getStandings per avere tutti i piloti titolari con i punti calcolati
+    const driverStandings = await getStandings(year);
+
+    // Raggruppiamo per team e sommiamo i punti dei 2 titolari
+    const teamsMap = new Map<number, {
+        team: any;
+        drivers: { driver: any; points: number }[];
+        totalPoints: number;
+    }>();
+
+    for (const entry of driverStandings) {
+        const teamId = entry.team.id;
+        if (!teamsMap.has(teamId)) {
+            teamsMap.set(teamId, {
+                team: entry.team,
+                drivers: [],
+                totalPoints: 0,
+            });
+        }
+        const teamData = teamsMap.get(teamId)!;
+        teamData.drivers.push({ driver: entry.driver, points: entry.points });
+        teamData.totalPoints += entry.points;
+    }
+
+    // Convertiamo in array e ordiniamo per punti totali decrescenti
+    return Array.from(teamsMap.values())
+        .sort((a, b) => b.totalPoints - a.totalPoints);
+}
