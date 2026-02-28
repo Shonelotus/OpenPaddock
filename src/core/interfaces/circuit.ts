@@ -1,28 +1,11 @@
 export interface Circuit {
-    // Identificativi
     id: number;
-    name: string;
-    location: string;
-    country: string;
-    flag: string;
-
-    // Tecnico
-    length: number;
-    turns: number;
-    laps: number;
-    timezone: string;
-
-    // Record
-    lapRecordTime?: string;
-    lapRecordDriverId?: number;
-    lapRecordYear?: number;
-
-    // Meta
-    firstGpYear: number;
-    capacity?: number;
-
-    // Media
-    image?: string;
-    circuitTrack?: string;
+    key: number | null;
+    short_name: string;
+    location: string | null;
+    country: string | null;
+    country_code: string | null;
+    length_km: number | null;
+    corners: number | null;
+    created_at: Date | null;
 }
-

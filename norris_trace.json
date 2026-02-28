@@ -1,0 +1,989 @@
+[
+  {
+    "race_results": {
+      "id": 8,
+      "session_id": 9472,
+      "driver_id": 4,
+      "position": 8,
+      "status": "Finished",
+      "points": 4,
+      "created_at": "2026-02-23T17:15:11.255Z"
+    },
+    "sessions": {
+      "id": 9472,
+      "event_id": 1229,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-03-02T15:00:00.000Z",
+      "date_end": "2024-03-02T17:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:36:06.549Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 23,
+      "session_id": 9480,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 15,
+      "created_at": "2026-02-23T17:15:11.869Z"
+    },
+    "sessions": {
+      "id": 9480,
+      "event_id": 1230,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-03-09T17:00:00.000Z",
+      "date_end": "2024-03-09T19:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:36:06.660Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 44,
+      "session_id": 9488,
+      "driver_id": 4,
+      "position": 5,
+      "status": "Finished",
+      "points": 10,
+      "created_at": "2026-02-23T17:15:12.503Z"
+    },
+    "sessions": {
+      "id": 9488,
+      "event_id": 1231,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-03-24T04:00:00.000Z",
+      "date_end": "2024-03-24T06:00:00.000Z",
+      "gmt_offset": "11:00:00",
+      "created_at": "2026-02-22T20:37:57.859Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 61,
+      "session_id": 9496,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:13.085Z"
+    },
+    "sessions": {
+      "id": 9496,
+      "event_id": 1232,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-04-07T05:00:00.000Z",
+      "date_end": "2024-04-07T07:00:00.000Z",
+      "gmt_offset": "09:00:00",
+      "created_at": "2026-02-22T20:37:58.882Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 99,
+      "session_id": 9672,
+      "driver_id": 4,
+      "position": 20,
+      "status": "Retired",
+      "points": 0,
+      "created_at": "2026-02-23T17:15:14.174Z"
+    },
+    "sessions": {
+      "id": 9672,
+      "event_id": 1233,
+      "name": "Sprint",
+      "type": "Race",
+      "date_start": "2024-04-20T03:00:00.000Z",
+      "date_end": "2024-04-20T04:00:00.000Z",
+      "gmt_offset": "08:00:00",
+      "created_at": "2026-02-22T20:37:59.490Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 100,
+      "session_id": 9673,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:14.555Z"
+    },
+    "sessions": {
+      "id": 9673,
+      "event_id": 1233,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-04-21T07:00:00.000Z",
+      "date_end": "2024-04-21T09:00:00.000Z",
+      "gmt_offset": "08:00:00",
+      "created_at": "2026-02-22T20:37:59.511Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 121,
+      "session_id": 9507,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:15.508Z"
+    },
+    "sessions": {
+      "id": 9507,
+      "event_id": 1234,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-05-05T20:00:00.000Z",
+      "date_end": "2024-05-05T22:00:00.000Z",
+      "gmt_offset": "-04:00:00",
+      "created_at": "2026-02-22T20:38:00.148Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 143,
+      "session_id": 9515,
+      "driver_id": 4,
+      "position": 4,
+      "status": "Finished",
+      "points": 12,
+      "created_at": "2026-02-23T17:15:16.146Z"
+    },
+    "sessions": {
+      "id": 9515,
+      "event_id": 1235,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-05-19T13:00:00.000Z",
+      "date_end": "2024-05-19T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:00.784Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 161,
+      "session_id": 9523,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:16.787Z"
+    },
+    "sessions": {
+      "id": 9523,
+      "event_id": 1236,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-05-26T13:00:00.000Z",
+      "date_end": "2024-05-26T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:01.420Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 181,
+      "session_id": 9531,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 19,
+      "created_at": "2026-02-23T17:15:17.442Z"
+    },
+    "sessions": {
+      "id": 9531,
+      "event_id": 1237,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-06-09T18:00:00.000Z",
+      "date_end": "2024-06-09T20:00:00.000Z",
+      "gmt_offset": "-04:00:00",
+      "created_at": "2026-02-22T20:38:02.051Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 219,
+      "session_id": 9539,
+      "driver_id": 4,
+      "position": 20,
+      "status": "Lapped",
+      "points": 0,
+      "created_at": "2026-02-23T17:15:18.324Z"
+    },
+    "sessions": {
+      "id": 9539,
+      "event_id": 1238,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-06-23T13:00:00.000Z",
+      "date_end": "2024-06-23T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:02.678Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 222,
+      "session_id": 9550,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 15,
+      "created_at": "2026-02-23T17:15:18.821Z"
+    },
+    "sessions": {
+      "id": 9550,
+      "event_id": 1239,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-06-30T13:00:00.000Z",
+      "date_end": "2024-06-30T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:03.300Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 241,
+      "session_id": 9558,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:19.800Z"
+    },
+    "sessions": {
+      "id": 9558,
+      "event_id": 1240,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-07-07T14:00:00.000Z",
+      "date_end": "2024-07-07T16:00:00.000Z",
+      "gmt_offset": "01:00:00",
+      "created_at": "2026-02-22T20:38:03.925Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 264,
+      "session_id": 9566,
+      "driver_id": 4,
+      "position": 5,
+      "status": "Finished",
+      "points": 10,
+      "created_at": "2026-02-23T17:15:20.635Z"
+    },
+    "sessions": {
+      "id": 9566,
+      "event_id": 1241,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-07-21T13:00:00.000Z",
+      "date_end": "2024-07-21T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:04.557Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 280,
+      "session_id": 9574,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 26,
+      "created_at": "2026-02-23T17:15:21.191Z"
+    },
+    "sessions": {
+      "id": 9574,
+      "event_id": 1242,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-07-28T13:00:00.000Z",
+      "date_end": "2024-07-28T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:05.196Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 302,
+      "session_id": 9582,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 16,
+      "created_at": "2026-02-23T17:15:21.868Z"
+    },
+    "sessions": {
+      "id": 9582,
+      "event_id": 1243,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-08-25T13:00:00.000Z",
+      "date_end": "2024-08-25T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:05.829Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 323,
+      "session_id": 9590,
+      "driver_id": 4,
+      "position": 4,
+      "status": "Finished",
+      "points": 13,
+      "created_at": "2026-02-23T17:15:22.724Z"
+    },
+    "sessions": {
+      "id": 9590,
+      "event_id": 1244,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-09-01T13:00:00.000Z",
+      "date_end": "2024-09-01T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:06.460Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 340,
+      "session_id": 9598,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:23.323Z"
+    },
+    "sessions": {
+      "id": 9598,
+      "event_id": 1245,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-09-15T11:00:00.000Z",
+      "date_end": "2024-09-15T13:00:00.000Z",
+      "gmt_offset": "04:00:00",
+      "created_at": "2026-02-22T20:38:07.089Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 363,
+      "session_id": 9606,
+      "driver_id": 4,
+      "position": 4,
+      "status": "Finished",
+      "points": 12,
+      "created_at": "2026-02-23T17:15:24.171Z"
+    },
+    "sessions": {
+      "id": 9606,
+      "event_id": 1246,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-09-22T12:00:00.000Z",
+      "date_end": "2024-09-22T14:00:00.000Z",
+      "gmt_offset": "08:00:00",
+      "created_at": "2026-02-22T20:38:07.735Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 381,
+      "session_id": 9617,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:24.864Z"
+    },
+    "sessions": {
+      "id": 9617,
+      "event_id": 1247,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-10-20T19:00:00.000Z",
+      "date_end": "2024-10-20T21:00:00.000Z",
+      "gmt_offset": "-05:00:00",
+      "created_at": "2026-02-22T20:38:08.370Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 405,
+      "session_id": 9625,
+      "driver_id": 4,
+      "position": 6,
+      "status": "Finished",
+      "points": 8,
+      "created_at": "2026-02-23T17:15:25.725Z"
+    },
+    "sessions": {
+      "id": 9625,
+      "event_id": 1248,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-10-27T20:00:00.000Z",
+      "date_end": "2024-10-27T22:00:00.000Z",
+      "gmt_offset": "-06:00:00",
+      "created_at": "2026-02-22T20:38:09.018Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 425,
+      "session_id": 9636,
+      "driver_id": 4,
+      "position": 6,
+      "status": "Finished",
+      "points": 9,
+      "created_at": "2026-02-23T17:15:26.797Z"
+    },
+    "sessions": {
+      "id": 9636,
+      "event_id": 1249,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-11-03T15:30:00.000Z",
+      "date_end": "2024-11-03T17:30:00.000Z",
+      "gmt_offset": "-03:00:00",
+      "created_at": "2026-02-22T20:38:09.646Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 449,
+      "session_id": 9644,
+      "driver_id": 4,
+      "position": 10,
+      "status": "Finished",
+      "points": 2,
+      "created_at": "2026-02-23T17:15:27.620Z"
+    },
+    "sessions": {
+      "id": 9644,
+      "event_id": 1250,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-11-24T06:00:00.000Z",
+      "date_end": "2024-11-24T07:59:59.000Z",
+      "gmt_offset": "-08:00:00",
+      "created_at": "2026-02-22T20:38:10.274Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 460,
+      "session_id": 9655,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:28.211Z"
+    },
+    "sessions": {
+      "id": 9655,
+      "event_id": 1251,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2024-12-01T16:00:00.000Z",
+      "date_end": "2024-12-01T18:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:38:10.898Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 481,
+      "session_id": 9693,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:28.982Z"
+    },
+    "sessions": {
+      "id": 9693,
+      "event_id": 1254,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-03-16T04:00:00.000Z",
+      "date_end": "2025-03-16T06:00:00.000Z",
+      "gmt_offset": "11:00:00",
+      "created_at": "2026-02-22T20:38:14.787Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 501,
+      "session_id": 9998,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:29.703Z"
+    },
+    "sessions": {
+      "id": 9998,
+      "event_id": 1255,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-03-23T07:00:00.000Z",
+      "date_end": "2025-03-23T09:00:00.000Z",
+      "gmt_offset": "08:00:00",
+      "created_at": "2026-02-22T20:38:15.408Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 522,
+      "session_id": 10006,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 15,
+      "created_at": "2026-02-23T17:15:30.310Z"
+    },
+    "sessions": {
+      "id": 10006,
+      "event_id": 1256,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-04-06T05:00:00.000Z",
+      "date_end": "2025-04-06T07:00:00.000Z",
+      "gmt_offset": "09:00:00",
+      "created_at": "2026-02-22T20:38:16.041Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 543,
+      "session_id": 10014,
+      "driver_id": 4,
+      "position": 4,
+      "status": "Finished",
+      "points": 12,
+      "created_at": "2026-02-23T17:15:30.945Z"
+    },
+    "sessions": {
+      "id": 10014,
+      "event_id": 1257,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-04-13T15:00:00.000Z",
+      "date_end": "2025-04-13T17:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:38:16.675Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 561,
+      "session_id": 10022,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:31.561Z"
+    },
+    "sessions": {
+      "id": 10022,
+      "event_id": 1258,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-04-20T17:00:00.000Z",
+      "date_end": "2025-04-20T19:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:38:17.317Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 581,
+      "session_id": 10033,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:32.247Z"
+    },
+    "sessions": {
+      "id": 10033,
+      "event_id": 1259,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-05-04T20:00:00.000Z",
+      "date_end": "2025-05-04T22:00:00.000Z",
+      "gmt_offset": "-04:00:00",
+      "created_at": "2026-02-22T20:38:17.955Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 600,
+      "session_id": 9987,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:32.874Z"
+    },
+    "sessions": {
+      "id": 9987,
+      "event_id": 1260,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-05-18T13:00:00.000Z",
+      "date_end": "2025-05-18T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:18.599Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 621,
+      "session_id": 9979,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:33.772Z"
+    },
+    "sessions": {
+      "id": 9979,
+      "event_id": 1261,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-05-25T13:00:00.000Z",
+      "date_end": "2025-05-25T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:19.256Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 656,
+      "session_id": 9971,
+      "driver_id": 4,
+      "position": 18,
+      "status": "Retired",
+      "points": 0,
+      "created_at": "2026-02-23T17:15:34.631Z"
+    },
+    "sessions": {
+      "id": 9971,
+      "event_id": 1262,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-06-01T13:00:00.000Z",
+      "date_end": "2025-06-01T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:19.896Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 659,
+      "session_id": 9963,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:35.040Z"
+    },
+    "sessions": {
+      "id": 9963,
+      "event_id": 1263,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-06-15T18:00:00.000Z",
+      "date_end": "2025-06-15T20:00:00.000Z",
+      "gmt_offset": "-04:00:00",
+      "created_at": "2026-02-22T20:38:20.766Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 679,
+      "session_id": 9955,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:35.693Z"
+    },
+    "sessions": {
+      "id": 9955,
+      "event_id": 1264,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-06-29T13:00:00.000Z",
+      "date_end": "2025-06-29T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:21.390Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 700,
+      "session_id": 9947,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:36.350Z"
+    },
+    "sessions": {
+      "id": 9947,
+      "event_id": 1277,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-07-06T14:00:00.000Z",
+      "date_end": "2025-07-06T16:00:00.000Z",
+      "gmt_offset": "01:00:00",
+      "created_at": "2026-02-22T20:38:22.060Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 719,
+      "session_id": 9939,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:37.014Z"
+    },
+    "sessions": {
+      "id": 9939,
+      "event_id": 1265,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-07-27T13:00:00.000Z",
+      "date_end": "2025-07-27T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:22.770Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 756,
+      "session_id": 9928,
+      "driver_id": 4,
+      "position": 18,
+      "status": "Retired",
+      "points": 0,
+      "created_at": "2026-02-23T17:15:37.865Z"
+    },
+    "sessions": {
+      "id": 9928,
+      "event_id": 1266,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-08-03T13:00:00.000Z",
+      "date_end": "2025-08-03T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:23.400Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 760,
+      "session_id": 9920,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:38.288Z"
+    },
+    "sessions": {
+      "id": 9920,
+      "event_id": 1267,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-08-31T13:00:00.000Z",
+      "date_end": "2025-08-31T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:24.027Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 785,
+      "session_id": 9912,
+      "driver_id": 4,
+      "position": 7,
+      "status": "Finished",
+      "points": 6,
+      "created_at": "2026-02-23T17:15:38.977Z"
+    },
+    "sessions": {
+      "id": 9912,
+      "event_id": 1268,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-09-07T13:00:00.000Z",
+      "date_end": "2025-09-07T15:00:00.000Z",
+      "gmt_offset": "02:00:00",
+      "created_at": "2026-02-22T20:38:24.667Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 801,
+      "session_id": 9904,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 15,
+      "created_at": "2026-02-23T17:15:39.757Z"
+    },
+    "sessions": {
+      "id": 9904,
+      "event_id": 1269,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-09-21T11:00:00.000Z",
+      "date_end": "2025-09-21T13:00:00.000Z",
+      "gmt_offset": "04:00:00",
+      "created_at": "2026-02-22T20:38:25.317Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 820,
+      "session_id": 9896,
+      "driver_id": 4,
+      "position": 2,
+      "status": "Finished",
+      "points": 18,
+      "created_at": "2026-02-23T17:15:40.342Z"
+    },
+    "sessions": {
+      "id": 9896,
+      "event_id": 1270,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-10-05T12:00:00.000Z",
+      "date_end": "2025-10-05T14:00:00.000Z",
+      "gmt_offset": "08:00:00",
+      "created_at": "2026-02-22T20:38:26.092Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 839,
+      "session_id": 9888,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:41.016Z"
+    },
+    "sessions": {
+      "id": 9888,
+      "event_id": 1271,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-10-19T19:00:00.000Z",
+      "date_end": "2025-10-19T21:00:00.000Z",
+      "gmt_offset": "-05:00:00",
+      "created_at": "2026-02-22T20:38:26.840Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 859,
+      "session_id": 9877,
+      "driver_id": 4,
+      "position": 1,
+      "status": "Finished",
+      "points": 25,
+      "created_at": "2026-02-23T17:15:41.672Z"
+    },
+    "sessions": {
+      "id": 9877,
+      "event_id": 1272,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-10-26T20:00:00.000Z",
+      "date_end": "2025-10-26T22:00:00.000Z",
+      "gmt_offset": "-06:00:00",
+      "created_at": "2026-02-22T20:38:27.463Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 897,
+      "session_id": 9869,
+      "driver_id": 4,
+      "position": 19,
+      "status": "Disqualified",
+      "points": 0,
+      "created_at": "2026-02-23T17:15:42.553Z"
+    },
+    "sessions": {
+      "id": 9869,
+      "event_id": 1273,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-11-09T17:00:00.000Z",
+      "date_end": "2025-11-09T19:00:00.000Z",
+      "gmt_offset": "-03:00:00",
+      "created_at": "2026-02-22T20:38:28.098Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 902,
+      "session_id": 9858,
+      "driver_id": 4,
+      "position": 4,
+      "status": "Finished",
+      "points": 12,
+      "created_at": "2026-02-23T17:15:42.985Z"
+    },
+    "sessions": {
+      "id": 9858,
+      "event_id": 1274,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-11-23T04:00:00.000Z",
+      "date_end": "2025-11-23T06:00:00.000Z",
+      "gmt_offset": "-08:00:00",
+      "created_at": "2026-02-22T20:38:28.734Z"
+    }
+  },
+  {
+    "race_results": {
+      "id": 921,
+      "session_id": 9850,
+      "driver_id": 4,
+      "position": 3,
+      "status": "Finished",
+      "points": 15,
+      "created_at": "2026-02-23T17:15:43.696Z"
+    },
+    "sessions": {
+      "id": 9850,
+      "event_id": 1275,
+      "name": "Race",
+      "type": "Race",
+      "date_start": "2025-11-30T16:00:00.000Z",
+      "date_end": "2025-11-30T18:00:00.000Z",
+      "gmt_offset": "03:00:00",
+      "created_at": "2026-02-22T20:38:29.372Z"
+    }
+  }
+]

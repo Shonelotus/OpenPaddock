@@ -14,13 +14,11 @@ export default function Header() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Controllo iniziale
         getCurrentUser().then(u => {
             setUser(u);
             setLoading(false);
         });
 
-        // Ascolta cambiamenti
         const { data: { subscription } } = onAuthStateChange((event, session) => {
             setUser(session?.user ?? null);
         });
@@ -28,7 +26,6 @@ export default function Header() {
         return () => subscription.unsubscribe();
     }, []);
 
-    // Stile base per i link (attivo vs inattivo)
     const getLinkClass = (path: string) => {
         const base = "text-sm font-medium transition-colors hover:text-primary";
         return pathname === path ? `${base} text-primary` : `${base} text-gray-400`;
@@ -59,6 +56,9 @@ export default function Header() {
                             <Link href="/stats" className={getLinkClass("/stats")}>
                                 Statistiche
                             </Link>
+                            <Link href="/standings" className={getLinkClass("/standings")}>
+                                Classifiche
+                            </Link>
                             <Link href="/profile" className={getLinkClass("/profile")}>
                                 Profilo
                             </Link>
@@ -67,7 +67,10 @@ export default function Header() {
 
                     {/* 3. DESTRA: Utente */}
                     <div className="flex items-center gap-4 ml-auto">
-                        {user ? (
+                        {loading ? (
+                            // STATO CARICAMENTO (evita il flicker)
+                            <div className="w-24 h-9" />
+                        ) : user ? (
                             // UTENTE LOGGATO
                             <div className="flex items-center gap-4">
                                 <span className="text-sm text-gray-300 hidden sm:inline-block">
