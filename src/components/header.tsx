@@ -67,7 +67,10 @@ export default function Header() {
 
                     {/* 3. DESTRA: Utente */}
                     <div className="flex items-center gap-4 ml-auto">
-                        {user ? (
+                        {loading ? (
+                            // STATO CARICAMENTO (evita il flicker)
+                            <div className="w-24 h-9" />
+                        ) : user ? (
                             // UTENTE LOGGATO
                             <div className="flex items-center gap-4">
                                 <span className="text-sm text-gray-300 hidden sm:inline-block">
